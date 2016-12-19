@@ -22,7 +22,11 @@ namespace Lab4 {
 			//TODO: добавьте код конструктора
 			//
 		}
-		String^ fileName;
+	private: System::Windows::Forms::Label^  labelEiler;
+	public:
+	private: System::Windows::Forms::TextBox^  textBoxEiler;
+	private: System::Windows::Forms::Button^  buttonClear;
+			 String^ fileName;
 	protected:
 		/// <summary>
 		/// Освободить все используемые ресурсы.
@@ -36,11 +40,12 @@ namespace Lab4 {
 		}
 	private: System::Windows::Forms::GroupBox^  groupBoxRsa;
 	private: System::Windows::Forms::Button^  buttonOpen;
+	private: System::Windows::Forms::Label^  labelKs;
 	protected:
 
 	protected:
 
-	private: System::Windows::Forms::Label^  labelKc;
+
 
 
 	private: System::Windows::Forms::Label^  labelQ;
@@ -54,8 +59,9 @@ namespace Lab4 {
 
 
 	private: System::Windows::Forms::TextBox^  textBoxP;
+	private: System::Windows::Forms::Label^  labelKo;
 
-	private: System::Windows::Forms::Label^  labelKcd;
+
 	private: System::Windows::Forms::Label^  labelR;
 	private: System::Windows::Forms::TextBox^  textBoxR;
 	private: System::Windows::Forms::TextBox^  textBoxKo;
@@ -84,10 +90,13 @@ namespace Lab4 {
 		void InitializeComponent(void)
 		{
 			this->groupBoxRsa = (gcnew System::Windows::Forms::GroupBox());
+			this->buttonClear = (gcnew System::Windows::Forms::Button());
+			this->labelEiler = (gcnew System::Windows::Forms::Label());
+			this->textBoxEiler = (gcnew System::Windows::Forms::TextBox());
 			this->buttonExecute = (gcnew System::Windows::Forms::Button());
 			this->textBoxKo = (gcnew System::Windows::Forms::TextBox());
-			this->labelKcd = (gcnew System::Windows::Forms::Label());
-			this->labelKc = (gcnew System::Windows::Forms::Label());
+			this->labelKo = (gcnew System::Windows::Forms::Label());
+			this->labelKs = (gcnew System::Windows::Forms::Label());
 			this->labelQ = (gcnew System::Windows::Forms::Label());
 			this->labelR = (gcnew System::Windows::Forms::Label());
 			this->labelP = (gcnew System::Windows::Forms::Label());
@@ -108,10 +117,13 @@ namespace Lab4 {
 			// 
 			// groupBoxRsa
 			// 
+			this->groupBoxRsa->Controls->Add(this->buttonClear);
+			this->groupBoxRsa->Controls->Add(this->labelEiler);
+			this->groupBoxRsa->Controls->Add(this->textBoxEiler);
 			this->groupBoxRsa->Controls->Add(this->buttonExecute);
 			this->groupBoxRsa->Controls->Add(this->textBoxKo);
-			this->groupBoxRsa->Controls->Add(this->labelKcd);
-			this->groupBoxRsa->Controls->Add(this->labelKc);
+			this->groupBoxRsa->Controls->Add(this->labelKo);
+			this->groupBoxRsa->Controls->Add(this->labelKs);
 			this->groupBoxRsa->Controls->Add(this->labelQ);
 			this->groupBoxRsa->Controls->Add(this->labelR);
 			this->groupBoxRsa->Controls->Add(this->labelP);
@@ -121,14 +133,41 @@ namespace Lab4 {
 			this->groupBoxRsa->Controls->Add(this->textBoxP);
 			this->groupBoxRsa->Location = System::Drawing::Point(12, 55);
 			this->groupBoxRsa->Name = L"groupBoxRsa";
-			this->groupBoxRsa->Size = System::Drawing::Size(274, 210);
+			this->groupBoxRsa->Size = System::Drawing::Size(274, 220);
 			this->groupBoxRsa->TabIndex = 0;
 			this->groupBoxRsa->TabStop = false;
 			this->groupBoxRsa->Text = L"RSA";
 			// 
+			// buttonClear
+			// 
+			this->buttonClear->Location = System::Drawing::Point(18, 188);
+			this->buttonClear->Name = L"buttonClear";
+			this->buttonClear->Size = System::Drawing::Size(100, 23);
+			this->buttonClear->TabIndex = 9;
+			this->buttonClear->Text = L"Очистить поля";
+			this->buttonClear->UseVisualStyleBackColor = true;
+			this->buttonClear->Click += gcnew System::EventHandler(this, &MainForm::buttonClear_Click);
+			// 
+			// labelEiler
+			// 
+			this->labelEiler->AutoSize = true;
+			this->labelEiler->Location = System::Drawing::Point(149, 135);
+			this->labelEiler->Name = L"labelEiler";
+			this->labelEiler->Size = System::Drawing::Size(99, 13);
+			this->labelEiler->TabIndex = 8;
+			this->labelEiler->Text = L"Функция Эйлера r";
+			// 
+			// textBoxEiler
+			// 
+			this->textBoxEiler->Location = System::Drawing::Point(152, 151);
+			this->textBoxEiler->Name = L"textBoxEiler";
+			this->textBoxEiler->ReadOnly = true;
+			this->textBoxEiler->Size = System::Drawing::Size(100, 20);
+			this->textBoxEiler->TabIndex = 7;
+			// 
 			// buttonExecute
 			// 
-			this->buttonExecute->Location = System::Drawing::Point(154, 151);
+			this->buttonExecute->Location = System::Drawing::Point(152, 188);
 			this->buttonExecute->Name = L"buttonExecute";
 			this->buttonExecute->Size = System::Drawing::Size(100, 23);
 			this->buttonExecute->TabIndex = 6;
@@ -138,30 +177,30 @@ namespace Lab4 {
 			// 
 			// textBoxKo
 			// 
-			this->textBoxKo->Location = System::Drawing::Point(154, 98);
+			this->textBoxKo->Location = System::Drawing::Point(152, 98);
 			this->textBoxKo->MaxLength = 5;
 			this->textBoxKo->Name = L"textBoxKo";
 			this->textBoxKo->Size = System::Drawing::Size(100, 20);
 			this->textBoxKo->TabIndex = 3;
 			this->textBoxKo->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MainForm::textBoxKo_KeyPress);
 			// 
-			// labelKcd
+			// labelKo
 			// 
-			this->labelKcd->AutoSize = true;
-			this->labelKcd->Location = System::Drawing::Point(151, 82);
-			this->labelKcd->Name = L"labelKcd";
-			this->labelKcd->Size = System::Drawing::Size(103, 13);
-			this->labelKcd->TabIndex = 2;
-			this->labelKcd->Text = L"Открытый ключ Kc";
+			this->labelKo->AutoSize = true;
+			this->labelKo->Location = System::Drawing::Point(149, 82);
+			this->labelKo->Name = L"labelKo";
+			this->labelKo->Size = System::Drawing::Size(90, 13);
+			this->labelKo->TabIndex = 2;
+			this->labelKo->Text = L"Открытый ключ ";
 			// 
-			// labelKc
+			// labelKs
 			// 
-			this->labelKc->AutoSize = true;
-			this->labelKc->Location = System::Drawing::Point(151, 29);
-			this->labelKc->Name = L"labelKc";
-			this->labelKc->Size = System::Drawing::Size(103, 13);
-			this->labelKc->TabIndex = 5;
-			this->labelKc->Text = L"Закрытый ключ Kc";
+			this->labelKs->AutoSize = true;
+			this->labelKs->Location = System::Drawing::Point(149, 29);
+			this->labelKs->Name = L"labelKs";
+			this->labelKs->Size = System::Drawing::Size(90, 13);
+			this->labelKs->TabIndex = 5;
+			this->labelKs->Text = L"Закрытый ключ ";
 			// 
 			// labelQ
 			// 
@@ -175,7 +214,7 @@ namespace Lab4 {
 			// labelR
 			// 
 			this->labelR->AutoSize = true;
-			this->labelR->Location = System::Drawing::Point(15, 138);
+			this->labelR->Location = System::Drawing::Point(15, 135);
 			this->labelR->Name = L"labelR";
 			this->labelR->Size = System::Drawing::Size(51, 13);
 			this->labelR->TabIndex = 1;
@@ -192,11 +231,12 @@ namespace Lab4 {
 			// 
 			// textBoxR
 			// 
-			this->textBoxR->Location = System::Drawing::Point(18, 154);
+			this->textBoxR->Location = System::Drawing::Point(18, 151);
 			this->textBoxR->MaxLength = 5;
 			this->textBoxR->Name = L"textBoxR";
 			this->textBoxR->Size = System::Drawing::Size(100, 20);
 			this->textBoxR->TabIndex = 0;
+			this->textBoxR->TextChanged += gcnew System::EventHandler(this, &MainForm::textBoxR_TextChanged);
 			this->textBoxR->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MainForm::textBoxR_KeyPress);
 			// 
 			// textBoxQ
@@ -206,11 +246,12 @@ namespace Lab4 {
 			this->textBoxQ->Name = L"textBoxQ";
 			this->textBoxQ->Size = System::Drawing::Size(100, 20);
 			this->textBoxQ->TabIndex = 2;
+			this->textBoxQ->TextChanged += gcnew System::EventHandler(this, &MainForm::textBoxQ_TextChanged);
 			this->textBoxQ->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MainForm::textBoxQ_KeyPress);
 			// 
 			// textBoxKs
 			// 
-			this->textBoxKs->Location = System::Drawing::Point(154, 45);
+			this->textBoxKs->Location = System::Drawing::Point(152, 45);
 			this->textBoxKs->MaxLength = 5;
 			this->textBoxKs->Name = L"textBoxKs";
 			this->textBoxKs->Size = System::Drawing::Size(100, 20);
@@ -224,6 +265,7 @@ namespace Lab4 {
 			this->textBoxP->Name = L"textBoxP";
 			this->textBoxP->Size = System::Drawing::Size(100, 20);
 			this->textBoxP->TabIndex = 0;
+			this->textBoxP->TextChanged += gcnew System::EventHandler(this, &MainForm::textBoxP_TextChanged);
 			this->textBoxP->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MainForm::textBoxP_KeyPress);
 			// 
 			// buttonOpen
@@ -242,15 +284,18 @@ namespace Lab4 {
 			this->textBoxFileName->Location = System::Drawing::Point(118, 19);
 			this->textBoxFileName->Name = L"textBoxFileName";
 			this->textBoxFileName->ReadOnly = true;
-			this->textBoxFileName->Size = System::Drawing::Size(286, 20);
+			this->textBoxFileName->Size = System::Drawing::Size(304, 20);
 			this->textBoxFileName->TabIndex = 7;
 			// 
 			// textBoxPlain
 			// 
+			this->textBoxPlain->BackColor = System::Drawing::SystemColors::Window;
 			this->textBoxPlain->Location = System::Drawing::Point(292, 71);
 			this->textBoxPlain->Multiline = true;
 			this->textBoxPlain->Name = L"textBoxPlain";
-			this->textBoxPlain->Size = System::Drawing::Size(239, 86);
+			this->textBoxPlain->ReadOnly = true;
+			this->textBoxPlain->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
+			this->textBoxPlain->Size = System::Drawing::Size(257, 86);
 			this->textBoxPlain->TabIndex = 8;
 			// 
 			// labelPlain
@@ -265,7 +310,7 @@ namespace Lab4 {
 			// labelCipher
 			// 
 			this->labelCipher->AutoSize = true;
-			this->labelCipher->Location = System::Drawing::Point(292, 160);
+			this->labelCipher->Location = System::Drawing::Point(292, 170);
 			this->labelCipher->Name = L"labelCipher";
 			this->labelCipher->Size = System::Drawing::Size(70, 13);
 			this->labelCipher->TabIndex = 10;
@@ -273,10 +318,13 @@ namespace Lab4 {
 			// 
 			// textBoxCipher
 			// 
-			this->textBoxCipher->Location = System::Drawing::Point(292, 176);
+			this->textBoxCipher->BackColor = System::Drawing::SystemColors::Window;
+			this->textBoxCipher->Location = System::Drawing::Point(292, 186);
 			this->textBoxCipher->Multiline = true;
 			this->textBoxCipher->Name = L"textBoxCipher";
-			this->textBoxCipher->Size = System::Drawing::Size(236, 89);
+			this->textBoxCipher->ReadOnly = true;
+			this->textBoxCipher->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
+			this->textBoxCipher->Size = System::Drawing::Size(257, 89);
 			this->textBoxCipher->TabIndex = 11;
 			// 
 			// comboBoxTask
@@ -284,7 +332,7 @@ namespace Lab4 {
 			this->comboBoxTask->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->comboBoxTask->FormattingEnabled = true;
 			this->comboBoxTask->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Шифрование", L"Дешифрование", L"Взлом" });
-			this->comboBoxTask->Location = System::Drawing::Point(410, 19);
+			this->comboBoxTask->Location = System::Drawing::Point(428, 19);
 			this->comboBoxTask->Name = L"comboBoxTask";
 			this->comboBoxTask->Size = System::Drawing::Size(121, 21);
 			this->comboBoxTask->TabIndex = 12;
@@ -298,7 +346,7 @@ namespace Lab4 {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(543, 280);
+			this->ClientSize = System::Drawing::Size(561, 287);
 			this->Controls->Add(this->comboBoxTask);
 			this->Controls->Add(this->textBoxCipher);
 			this->Controls->Add(this->labelCipher);
@@ -328,9 +376,11 @@ namespace Lab4 {
 
 	private: System::Void comboBoxTask_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
 
-	void encryptRSA(unsigned short p, unsigned short q, unsigned short key);
+	void encryptRSA(unsigned short p, unsigned short q, unsigned short secretKey);
 
-	void decryptRSA(unsigned short r, unsigned short key);
+	void decryptRSA(unsigned short r, unsigned short secretKey);
+
+	void breakRSA(unsigned short r, unsigned short publicKey);
 
 	private: System::Void textBoxP_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e);
 
@@ -342,5 +392,14 @@ namespace Lab4 {
 
 	private: System::Void textBoxKo_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e);
 
+	void checkPQ();
+
+	private: System::Void textBoxP_TextChanged(System::Object^  sender, System::EventArgs^  e);
+
+	private: System::Void textBoxQ_TextChanged(System::Object^  sender, System::EventArgs^  e);
+
+	private: System::Void buttonClear_Click(System::Object^  sender, System::EventArgs^  e);
+
+	private: System::Void textBoxR_TextChanged(System::Object^  sender, System::EventArgs^  e);
 };
 }
