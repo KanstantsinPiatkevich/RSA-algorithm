@@ -121,27 +121,3 @@ unsigned short breakCipher(unsigned short value, unsigned short p, unsigned shor
 	unsigned short secretKey = getKey(p, q, publicKey);
 	return getFastExp(value, secretKey, r);
 }
-
-unsigned short getEuclidExtended(unsigned short b, int a)
-{
-	int d0 = a;
-	int d1 = b;
-	int x0 = 1, x1 = 0;
-	int y0 = 0, y1 = 1;
-	while (d1 > 1)
-	{
-		int q = d0 / d1;
-	    int d2 = d0 % d1;
-	    int x2 = x0 - q * x1;
-	    int y2 = y0 - q * y1;
-	    d0 = d1; 
-	    d1 = d2;
-		x0 = x1; 
-	    x1 = x2;
-	    y0 = y1; 
-	    y1 = y2;
-	}
-	if (y1 < 0)
-		y1 += a;
-	return y1;
-}
