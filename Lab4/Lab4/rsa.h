@@ -15,5 +15,4 @@ unsigned short getPlain(unsigned short, unsigned short, unsigned short);
 
 unsigned short breakCipher(unsigned short, unsigned short, unsigned short, unsigned short);
 
-unsigned short getEuclidExtended(unsigned short b, int a);
 #endif
